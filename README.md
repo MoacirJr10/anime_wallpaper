@@ -1,6 +1,6 @@
 # anime_wallpaper
 
-# 🌙 Anime Wallpaper
+# Anime Wallpaper
 
 🇺🇸 [English](#-english) | 🇧🇷 [Português](#-português)
 
