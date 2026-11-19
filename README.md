@@ -1,5 +1,3 @@
-# anime_wallpaper
-
 # Anime Wallpaper
 
 🇺🇸 [English](#-english) | 🇧🇷 [Português](#-português)
@@ -41,6 +39,7 @@ Contributions are welcome! **Every submission is reviewed by the maintainer befo
 ###  Rules
 
 - **Only submit images you have the right to share.** If you are not the artist, include the original source and credit.
+- Credit alone does not grant redistribution rights. Explain the permission or license for each new image.
 - If an artist asks for their work to be removed, it will be removed.
 - **No NSFW, gore, hateful or offensive content.**
 - Preferred formats: `.png`, `.jpg` or `.webp`.
@@ -88,6 +87,7 @@ Contribuições são bem-vindas! **Toda imagem enviada é analisada pelo mantene
 
 ###  Regras
 
+- Envie somente imagens com autorização para redistribuição; dar crédito não substitui a permissão. Informe a licença ou autorização de cada nova imagem.
 - Se um artista pedir a remoção da obra, ela será removida.
 - **Sem conteúdo NSFW, gore, de ódio ou ofensivo.**
 - Formatos preferidos: `.png`, `.jpg` ou `.webp`.
@@ -102,3 +102,7 @@ Todas as imagens pertencem aos seus respectivos artistas. Este repositório apen
 ---
 
 ⭐ If you like this project, leave a star! / Se curtiu o projeto, deixe uma estrela!
+
+## Validação automática / Automated validation
+
+A revisão verifica manualmente direitos e conteúdo. O GitHub Actions verifica apenas formato, tamanho e nomes dos arquivos novos ou alterados; não comprova direitos autorais.

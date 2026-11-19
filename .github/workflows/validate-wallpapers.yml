@@ -1,0 +1,39 @@
+name: Validate wallpaper submissions
+on: [pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check new or changed wallpaper files
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          python - <<'PY'
+          import pathlib, subprocess, re
+          paths = subprocess.check_output(['git','diff','--name-only','-z','--diff-filter=ACMR',__import__('os').environ['BASE'],'HEAD','--','wallpapers/']).split(b'\0')
+          errors = []
+          for raw in paths:
+              if not raw:
+                  continue
+              p = pathlib.Path(__import__('os').fsdecode(raw))
+              if p.is_symlink() or not p.is_file():
+                  errors.append(f'{p}: arquivo regular obrigatório')
+                  continue
+              if not re.fullmatch(r'[a-z0-9_]+\.(png|jpe?g|webp)',p.name):
+                  errors.append(f'{p}: nome ou extensão inválidos')
+              if p.stat().st_size > 5 * 1024 * 1024:
+                  errors.append(f'{p}: maior que 5 MiB')
+              with p.open('rb') as f:
+                  h = f.read(12)
+              ext = p.suffix
+              if not ((ext == '.png' and h.startswith(b'\x89PNG\r\n\x1a\n')) or (ext in ('.jpg','.jpeg') and h.startswith(b'\xff\xd8\xff')) or (ext == '.webp' and h.startswith(b'RIFF') and h[8:12] == b'WEBP')):
+                  errors.append(f'{p}: assinatura de imagem incompatível')
+          for e in errors:
+              print(e)
+          raise SystemExit(bool(errors))
+          PY
